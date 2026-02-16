@@ -1,0 +1,32 @@
+import random
+words = ["code", "python", "java", "program"]
+chosen_word = random.choice(words)
+
+display = []
+for _ in chosen_word:
+    display.append("_")
+
+lives = 6
+guessed_letters = []
+
+while lives > 0 and "_" in display:
+    print("\n current word:", "".join(display))
+    guess = input("guess a letter:").lower()
+    if guess in guessed_letters:
+        print("you already guessed this letter")
+        continue
+    guessed_letters.append(guess)
+
+    if guess in chosen_word:
+        for index in range(len(chosen_word)):
+            if chosen_word[index] == guess:
+                display[index] = guess
+        print("correct guess")
+    else:
+        lives -= 1
+        print("wrong guess! lives-left:", lives)
+
+if "_" not in display:
+    print("\n you win, word was:", chosen_word)
+else:
+    print("\n game over!, word was:", chosen_word)
